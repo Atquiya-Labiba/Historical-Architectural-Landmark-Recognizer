@@ -20,7 +20,7 @@ The types are following: <br/>
 12. Machu Picchu (Peru)
 13. Chichen Itza (Mexico)
 
-<a href="/recognizer.html" 
+<a href="/landmark_recognizer.html" 
    style="display:inline-block; padding:12px 25px; background-color:#20B2AA; color:black; font-weight:bold; border-radius:5px; text-decoration:none; transition:0.3s; margin-top:20px;">
    Try Now
 </a>
