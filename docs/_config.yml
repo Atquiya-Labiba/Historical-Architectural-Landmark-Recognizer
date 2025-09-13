@@ -8,6 +8,6 @@ description: An image recognizer that recognizes 13 different historical and arc
 include:
   - _includes/footer.html
 
-
+baseurl: "/Historical-Architectural-Landmark-Recognizer"
 sass:
   style: compressed
