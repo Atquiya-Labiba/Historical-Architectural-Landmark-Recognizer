@@ -1,0 +1,11 @@
+remote_theme: reverie@master
+plugins :
+- jekyll-remote-theme
+
+title : Historical and Architectural Landmark Recognizer
+description : An image recognizer that recognizes 13 different historical and architectural landwmarks.
+author :
+  name : Atquiya Labiba Oni
+
+sass:
+  style: :compressed
