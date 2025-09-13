@@ -1,6 +1,6 @@
 ---
 title: Home
-layout: page
+layout: default
 ---
 
 # An Image Recognizer Model to Classify 13 different types of landmarks <br/>
