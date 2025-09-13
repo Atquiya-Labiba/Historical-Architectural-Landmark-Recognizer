@@ -19,7 +19,7 @@ An image classification model that leverages data collection, augmentation, mode
 ##  Dataset Preparation
 1. **Data Collection**  
    - Images of 13 famous historical and architectural landmarks are collected using DuckDuckGo Image Search 
-   - Each landmark is assigned to its own folder in the [`data/`](./data/) directory
+   - Each landmark is assigned to its own folder in the [data/](./data/) directory
 
 2. **Data Cleaning & Verification**  
    - The downloaded images are verified 
@@ -50,8 +50,9 @@ confusion image
 ![Model Comparison](./model_comparison.png)
 
 Details can be found from [Training and Data Cleaning Notebook](./notebooks/training_and_data_cleaning.ipynb)
+
 6. **Model Deployment**
-   - The model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in [deployment folder](./deployment) or [here](https://huggingface.co/spaces/atquiyaoni/landmark-recognizer).
+- The model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in [deployment folder](./deployment) or [here](https://huggingface.co/spaces/atquiyaoni/landmark-recognizer).
 **Recognizing Machu Picchu**
 ![Machu Pichu](./gradio_app.png)
 
