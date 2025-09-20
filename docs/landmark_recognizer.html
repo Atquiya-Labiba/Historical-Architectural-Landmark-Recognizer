@@ -1,131 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+title: Historical & Architectural Landmark Recognizer
+layout: page
+---
+<!-- Navigation Bar -->
+<nav class="top-nav">
+    <a href="index.md">Home</a>
+    <a href="landmark_recognizer.html">Landmark Recognizer</a>
+</nav>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historical and Architectural Landmark Recognizer</title>
-    body {
-    background-image: url(./Grey.jpg);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
+<style>
+    .top-nav {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        padding: 15px 30px;
+        background-color: #20B2AA;
+        font-weight: bold;
     }
 
+    .top-nav a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.3s;
+    }
+
+    .top-nav a:hover {
+        color: #000;
+    }
     #uploadBtn,
     #predictBtn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-    width: 80%;
-    max-width: 200px;
-    font-size: 16px;
-    color: white;
-    transition: background-color 0.3s ease;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+        width: 80%;
+        max-width: 200px;
+        font-size: 16px;
+        color: white;
+        transition: background-color 0.3s ease;
     }
 
     #uploadBtn {
-    background-color: #20B2AA;
+        background-color: #20B2AA;
     }
 
     #uploadBtn:hover {
-    background-color: #45a049;
+        background-color: #45a049;
     }
 
     #predictBtn {
-    background-color: #007BFF;
+        background-color: #007BFF;
     }
 
     #predictBtn:hover {
-    background-color: #0056b3;
+        background-color: #0056b3;
     }
 
     #photo {
-    display: none;
+        display: none;
     }
 
     #loadingMessage {
-    margin-top: 10px;
-    font-size: 16px;
+        margin-top: 10px;
+        font-size: 16px;
     }
 
     #results {
-    margin-top: 20px;
+        margin-top: 20px;
     }
 
     #label {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 10px;
-    text-transform: capitalize;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+        text-transform: capitalize;
 
     }
-    </style>
-</head>
+</style>
 
-<body>
-    <p><a href="https://atquiya-labiba.github.io/Historical-Architectural-Landmark-Recognizer/">← Back to Home</a></p>
-    <h1>Historical & Architectural Landmark Recognizer</h1>
-    <h3>Click on "Upload Image" to upload an image, then click "Predict Result"</h3>
+<p><a href="https://atquiya-labiba.github.io/Historical-Architectural-Landmark-Recognizer/">← Back to Home</a></p>
+<h1>Historical & Architectural Landmark Recognizer</h1>
+<h3>Click on "Upload Image" to upload an image, then click "Predict Result"</h3>
 
-    <button id="uploadBtn">Upload Image</button>
-    <input id="photo" type="file" accept="image/*">
+<button id="uploadBtn">Upload Image</button>
+<input id="photo" type="file" accept="image/*">
 
-    <button id="predictBtn">Predict Result</button>
+<button id="predictBtn">Predict Result</button>
 
-    <div id="loadingMessage"></div>
-    <div id="results">
-        <div id="label"></div>
-        <img id="imageResult" src="" width="100%" style="max-width: 500px;">
-    </div>
+<div id="loadingMessage"></div>
+<div id="results">
+    <div id="label"></div>
+    <img id="imageResult" src="" width="100%" style="max-width: 500px;">
+</div>
 
-    <script type="module">
-        import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
+<script type="module">
+    import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
 
-        const uploadBtn = document.getElementById("uploadBtn");
-        const fileInput = document.getElementById("photo");
-        const preview = document.getElementById("imageResult");
-        const resultBox = document.getElementById("label");
-        const predictBtn = document.getElementById("predictBtn");
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("photo");
+    const preview = document.getElementById("imageResult");
+    const resultBox = document.getElementById("label");
+    const predictBtn = document.getElementById("predictBtn");
 
 
-        uploadBtn.addEventListener("click", () => {
-            fileInput.click();
-        });
+    uploadBtn.addEventListener("click", () => {
+        fileInput.click();
+    });
 
-        // Show a preview when file is selected
-        fileInput.addEventListener("change", () => {
-            if (fileInput.files.length > 0) {
-                preview.src = URL.createObjectURL(fileInput.files[0]);
-                resultBox.innerText = "";
-            }
-        });
+    // Show a preview when file is selected
+    fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+            preview.src = URL.createObjectURL(fileInput.files[0]);
+            resultBox.innerText = "";
+        }
+    });
 
-        // Predict button 
-        predictBtn.addEventListener("click", async () => {
-            if (!fileInput.files.length) {
-                resultBox.innerText = "Please upload an image first.";
-                return;
-            }
+    // Predict button 
+    predictBtn.addEventListener("click", async () => {
+        if (!fileInput.files.length) {
+            resultBox.innerText = "Please upload an image first.";
+            return;
+        }
 
-            resultBox.innerText = "Please Wait....";
-            const imageFile = fileInput.files[0];
+        resultBox.innerText = "Please Wait....";
+        const imageFile = fileInput.files[0];
 
-            try {
-                const client = await Client.connect("atquiyaoni/landmark-recognizer");
-                const result = await client.predict("/predict", { image: imageFile });
+        try {
+            const client = await Client.connect("atquiyaoni/landmark-recognizer");
+            const result = await client.predict("/predict", { image: imageFile });
 
-                // Show top prediction
-                const topPrediction = result.data[0].label;
-                resultBox.innerText = topPrediction;
-            } catch (err) {
-                console.error(err);
-                resultBox.innerText = "Error: " + err.message;
-            }
-        });
-    </script>
-</body>
-
-</html>
+            // Show top prediction
+            const topPrediction = result.data[0].label;
+            resultBox.innerText = topPrediction;
+        } catch (err) {
+            console.error(err);
+            resultBox.innerText = "Error: " + err.message;
+        }
+    });
+</script>
