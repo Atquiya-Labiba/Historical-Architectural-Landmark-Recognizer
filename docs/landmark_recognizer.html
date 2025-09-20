@@ -3,113 +3,158 @@ title: Historical & Architectural Landmark Recognizer
 layout: page
 ---
 <style>
-    #uploadBtn,
-    #predictBtn {
+    .upload-box {
+        border: 2px dashed #007bff;
+        padding: 30px;
+        text-align: center;
+        border-radius: 8px;
+        margin: 20px 0;
+        background: #f8f9fa;
+    }
+
+    .upload-box:hover {
+        background: #e9ecef;
+    }
+
+    .btn {
         padding: 10px 20px;
+        margin: 10px;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
-        margin: 10px;
-        width: 80%;
-        max-width: 200px;
         font-size: 16px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #007bff;
         color: white;
-        transition: background-color 0.3s ease;
     }
 
-    #uploadBtn {
-        background-color: #20B2AA;
+    .btn-success {
+        background: #28a745;
+        color: white;
     }
 
-    #uploadBtn:hover {
-        background-color: #45a049;
+    .btn:hover {
+        opacity: 0.8;
     }
 
-    #predictBtn {
-        background-color: #007BFF;
-    }
-
-    #predictBtn:hover {
-        background-color: #0056b3;
+    .btn:disabled {
+        opacity: 0.5;
     }
 
     #photo {
         display: none;
     }
 
-    #loadingMessage {
-        margin-top: 10px;
-        font-size: 16px;
-    }
-
-    #results {
-        margin-top: 20px;
+    #imageResult {
+        max-width: 100%;
+        max-height: 400px;
+        margin: 20px 0;
+        border-radius: 8px;
     }
 
     #label {
         font-size: 24px;
         font-weight: bold;
-        margin-top: 10px;
-        text-transform: capitalize;
+        margin: 20px 0;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+    }
 
+    .success {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .error {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .landmarks {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 20px 0;
+    }
+
+    .landmark {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        border-left: 3px solid #007bff;
     }
 </style>
-<h1>Historical & Architectural Landmark Recognizer</h1>
-<h3>Click on "Upload Image" to upload an image, then click "Predict Result"</h3>
 
-<button id="uploadBtn">Upload Image</button>
-<input id="photo" type="file" accept="image/*">
+<div style="max-width: 800px; margin: 0 auto;">
+    <h3>How to Use</h3>
+    <ol>
+        <li>Upload a landmark image</li>
+        <li>Click "Classify Landmark"</li>
+        <li>Get results</li>
+    </ol>
+    <div class="upload-box" onclick="document.getElementById('photo').click()">
+        <h4>Upload Landmark Image</h4>
+        <p>Click here to select an image</p>
+        <button class="btn btn-primary" id="uploadBtn">Choose Image</button>
+        <input id="photo" type="file" accept="image/*">
+    </div>
 
-<button id="predictBtn">Predict Result</button>
+    <div style="text-align: center;">
+        <button class="btn btn-success" id="predictBtn">Classify Landmark</button>
+    </div>
 
-<div id="loadingMessage"></div>
-<div id="results">
-    <div id="label"></div>
-    <img id="imageResult" src="" width="100%" style="max-width: 500px;">
-</div>
+    <div id="loadingMessage" style="text-align: center; margin: 20px 0; color: #6c757d;"></div>
 
-<script type="module">
-    import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
+    <div id="results" style="text-align: center;">
+        <div id="label"></div>
+        <img id="imageResult" src="" style="display: none;">
+    </div>
 
-    const uploadBtn = document.getElementById("uploadBtn");
-    const fileInput = document.getElementById("photo");
-    const preview = document.getElementById("imageResult");
-    const resultBox = document.getElementById("label");
-    const predictBtn = document.getElementById("predictBtn");
+    <script type="module">
+        import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/+esm";
+
+        const uploadBtn = document.getElementById("uploadBtn");
+        const fileInput = document.getElementById("photo");
+        const preview = document.getElementById("imageResult");
+        const resultBox = document.getElementById("label");
+        const predictBtn = document.getElementById("predictBtn");
 
 
-    uploadBtn.addEventListener("click", () => {
-        fileInput.click();
-    });
+        uploadBtn.addEventListener("click", () => {
+            fileInput.click();
+        });
 
-    // Show a preview when file is selected
-    fileInput.addEventListener("change", () => {
-        if (fileInput.files.length > 0) {
-            preview.src = URL.createObjectURL(fileInput.files[0]);
-            resultBox.innerText = "";
-        }
-    });
+        // Show a preview when file is selected
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length > 0) {
+                preview.src = URL.createObjectURL(fileInput.files[0]);
+                resultBox.innerText = "";
+            }
+        });
 
-    // Predict button 
-    predictBtn.addEventListener("click", async () => {
-        if (!fileInput.files.length) {
-            resultBox.innerText = "Please upload an image first.";
-            return;
-        }
+        // Predict button 
+        predictBtn.addEventListener("click", async () => {
+            if (!fileInput.files.length) {
+                resultBox.innerText = "Please upload an image first.";
+                return;
+            }
 
-        resultBox.innerText = "Please Wait....";
-        const imageFile = fileInput.files[0];
+            resultBox.innerText = "Please Wait....";
+            const imageFile = fileInput.files[0];
 
-        try {
-            const client = await Client.connect("atquiyaoni/landmark-recognizer");
-            const result = await client.predict("/predict", { image: imageFile });
+            try {
+                const client = await Client.connect("atquiyaoni/landmark-recognizer");
+                const result = await client.predict("/predict", { image: imageFile });
 
-            // Show top prediction
-            const topPrediction = result.data[0].label;
-            resultBox.innerText = topPrediction;
-        } catch (err) {
-            console.error(err);
-            resultBox.innerText = "Error: " + err.message;
-        }
-    });
-</script>
+                // Show top prediction
+                const topPrediction = result.data[0].label;
+                resultBox.innerText = topPrediction;
+            } catch (err) {
+                console.error(err);
+                resultBox.innerText = "Error: " + err.message;
+            }
+        });
+    </script>
