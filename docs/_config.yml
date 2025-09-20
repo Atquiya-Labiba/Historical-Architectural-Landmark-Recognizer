@@ -5,5 +5,10 @@ plugins:
 title: Historical and Architectural Landmark Recognizer
 description: An image recognizer that recognizes 13 different historical and architectural landmarks
 
+# Navigation Links 
+navbar-links:
+  Home: "https://atquiya-labiba.github.io/Historical-Architectural-Landmark-Recognizer/"
+  Landmark Recognizer: "landmark_recognizer.html"
+
 sass:
   style: compressed

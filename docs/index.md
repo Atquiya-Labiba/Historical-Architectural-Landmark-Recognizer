@@ -2,35 +2,6 @@
 title: Home
 layout: page
 ---
-
-<!-- Navigation Bar -->
-<nav class="top-nav">
-  <a href="index.md">Home</a>
-  <a href="landmark_recognizer.html">Landmark Recognizer</a>
-</nav>
-
-<style>
-.top-nav {
-  display: flex;
-  justify-content: flex-end; 
-  gap: 20px;                 
-  padding: 15px 30px;        
-  background-color: #20B2AA; 
-  font-weight: bold;
-}
-
-.top-nav a {
-  text-decoration: none;    
-  color: white;             
-  transition: color 0.3s;
-}
-
-.top-nav a:hover {
-  color: #000; 
-}
-</style>
-
-
 # Historical & Architectural Landmark Recognizer 
 
 An image recognizer which helps you to identify and explore some of the world’s most famous historical and architectural landmarks!
