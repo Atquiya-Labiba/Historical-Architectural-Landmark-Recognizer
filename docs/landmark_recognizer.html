@@ -35,6 +35,11 @@ layout: page
         color: white;
     }
 
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
     .btn:hover {
         opacity: 0.8;
     }
@@ -95,11 +100,12 @@ layout: page
         <li>Click "Classify Landmark"</li>
         <li>Get results</li>
     </ol>
-    <div class="upload-box" onclick="document.getElementById('photo').click()">
+    <div class="upload-box">
         <h4>Upload Landmark Image</h4>
         <p>Click here to select an image</p>
         <button class="btn btn-primary" id="uploadBtn">Choose Image</button>
-        <input id="photo" type="file" accept="image/*">
+        <button class="btn btn-secondary" id="clearBtn">Clear Image</button> <!-- New button -->
+        <input id="photo" type="file" accept="image/*" style="display:none;">
     </div>
 
     <div style="text-align: center;">
@@ -121,16 +127,24 @@ layout: page
         const preview = document.getElementById("imageResult");
         const resultBox = document.getElementById("label");
         const predictBtn = document.getElementById("predictBtn");
-
+        const clearBtn = document.getElementById("clearBtn");
 
         uploadBtn.addEventListener("click", () => {
             fileInput.click();
+        });
+        clearBtn.addEventListener("click", () => {            
+            fileInput.value = "";            
+            preview.src = "";
+            preview.style.display = "none";            
+            resultBox.innerText = "";
+            resultBox.className = "";
         });
 
         // Show a preview when file is selected
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length > 0) {
                 preview.src = URL.createObjectURL(fileInput.files[0]);
+                preview.style.display = "block";
                 resultBox.innerText = "";
             }
         });
