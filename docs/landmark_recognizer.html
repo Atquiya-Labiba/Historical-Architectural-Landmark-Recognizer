@@ -52,6 +52,16 @@ layout: page
         display: none;
     }
 
+    #imageContainer {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    #resultBox {
+        text-transform: capitalize;
+    }
+
     #imageResult {
         max-width: 100%;
         max-height: 400px;
@@ -118,6 +128,12 @@ layout: page
 
     <div id="loadingMessage" style="text-align: center; margin: 20px 0; color: #6c757d;"></div>
 
+    <div id="imageContainer">
+        <img id="imageResult" src="">
+    </div>
+
+    <div id="resultBox"></div>
+
     <div id="results" style="text-align: center;">
         <div id="label"></div>
         <img id="imageResult" src="" style="display: none;">
@@ -160,7 +176,7 @@ layout: page
             preview.style.display = "none";
             resultBox.innerText = "";
             resultBox.className = "";
-            clearBtn.style.display = "none"; 
+            clearBtn.style.display = "none";
         });
 
         // Predict button 
@@ -179,7 +195,7 @@ layout: page
 
                 // Show top prediction
                 const topPrediction = result.data[0].label;
-                resultBox.innerText = topPrediction.charAt(0).toUpperCase() + topPrediction.slice(1);
+                resultBox.innerText = topPrediction;
             } catch (err) {
                 console.error(err);
                 resultBox.innerText = "Error: " + err.message;
