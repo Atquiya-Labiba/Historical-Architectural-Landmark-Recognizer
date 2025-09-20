@@ -50,26 +50,18 @@ layout: page
 
     #photo {
         display: none;
-    }
-
-    #imageContainer {
-        display: flex;
-        justify-content: center;
-        margin: 20px 0;
-    }
-
-    #resultBox {
-        text-transform: capitalize;
-    }
+    }    
 
     #imageResult {
         max-width: 100%;
         max-height: 400px;
-        margin: 20px 0;
+        object-fit: contain;
+        margin: 20px auto;
         border-radius: 8px;
     }
 
     #label {
+        text-transform: capitalize;
         font-size: 24px;
         font-weight: bold;
         margin: 20px 0;
@@ -126,13 +118,7 @@ layout: page
         <button class="btn btn-success" id="predictBtn">Classify Landmark</button>
     </div>
 
-    <div id="loadingMessage" style="text-align: center; margin: 20px 0; color: #6c757d;"></div>
-
-    <div id="imageContainer">
-        <img id="imageResult" src="">
-    </div>
-
-    <div id="resultBox"></div>
+    <div id="loadingMessage" style="text-align: center; margin: 20px 0; color: #6c757d;"></div>    
 
     <div id="results" style="text-align: center;">
         <div id="label"></div>
