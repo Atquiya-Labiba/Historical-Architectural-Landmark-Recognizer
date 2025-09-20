@@ -3,9 +3,11 @@ title: Home
 layout: default
 ---
 
-# An Image Recognizer Model to Classify 13 different types of landmarks <br/>
+# Historical & Architectural Landmark Recognizer 
 
-The types are following: <br/>
+An image recognizer which helps you to identify and explore some of the world’s most famous historical and architectural landmarks!
+
+Here are the landmarks our recognizer can identify: 
 1. Angkor Wat (Cambodia)
 2. The Forbidden City (China)
 3. Taj Mahal (India)
