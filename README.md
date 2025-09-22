@@ -16,45 +16,57 @@ An image classification model that leverages data collection, augmentation, mode
 - Machu Picchu (Peru)   
 - Chichen Itza (Mexico) 
 
-##  Dataset Preparation
-1. **Data Collection**  
+
+## 1. Data Collection 
    - Images of 13 famous historical and architectural landmarks are collected using DuckDuckGo Image Search 
    - Each landmark is assigned to its own folder in the [data/](./data/) directory
 
-2. **Data Cleaning & Verification**  
+## 2. Data Cleaning & Verification 
    - The downloaded images are verified 
    - Then any failed downloads are removed 
 
-3. **DataLoader**  
+## 3. DataLoader  
    - DataBlock is created to organize the dataset by images and their corresponding labels
    - The dataset is split into 90% training and 10% validation
    - Initial image resize: **128×128 pixels**.
    - Final augmentation resize: **224×224 pixels**.
    
-4. **Data Augmentation**
-	- Data augmentation is applied to increase variety in the training data
-	- RandomResizedCrop(224, min_scale=0.5) is used which randomly crops and resizes the images to 224×224 pixels
+## 4. Data Augmentation
+- Data augmentation is applied to increase variety in the training data
+- RandomResizedCrop(224, min_scale=0.5) is used which randomly crops and resizes the images to 224×224 pixels
 
  The final dataset has 3.5K+ images of 13 different classes. Details on data preparation can be found [here](./notebooks/data_prep.ipynb) 
  
-5. **Training and Data Cleaning**
+## 5. Training and Data Cleaning
 - The model is trained using ResNet34 as base model and fine tuned for 3 epochs. After data cleaning the model is retrained for 3 epochs achieving accuracy of 98.2%
 - Three other models: EfficientNet B0, EfficientNet B1 and MobileNet V3 Small are used for comparison. We are testing a (ResNet) against modern, efficient alternatives to find the best fit for our project.
-- ResNet-34 performed best for our case because it has a larger capacity to learn complex patterns.
- 
-**Confusion Matrix:**  
-![Confusion Matrix](./confusion_matrix.png)
-
-**Model Comparison:**  
-![Model Comparison](./model_comparison.png)
-
+- ResNet-34 performed best for our case because it has a larger capacity to learn complex patterns. 
+### Confusion Matrix for ResNet-34 Model   
+   <p align="center">
+     <img src="./confusion_matrix.png" alt="Confusion Matrix" width="500">
+   </p> 
+   <p align="center">
+  <em> Confusion Matrix for ResNet-34 Model</em>
+  </p>
+   
+### Model Comparison
+Three additional models—EfficientNet-B0, EfficientNet-B1, and MobileNet V3 Small—were also trained and evaluated. However, ResNet-34 achieved the best overall performance.
+   <p align="center">
+     <img src="./model_comparison.png"
+   </p>
+   <p align="center">
+  <em>Accuracy comparison across ResNet-34, EfficientNet-B0, EfficientNet-B1, and MobileNet V3 Small</em>
+  </p>
+	   
 Details can be found from [Training and Data Cleaning Notebook](./notebooks/training_and_data_cleaning.ipynb)
 
-6. **Model Deployment**
-    The model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in [deployment folder](./deployment) or [here](https://huggingface.co/spaces/atquiyaoni/landmark-recognizer)
+## 6. Model Deployment
+The model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in [deployment folder](./deployment) or [here](https://huggingface.co/spaces/atquiyaoni/landmark-recognizer)
 
-**Recognizing Machu Picchu**
-![Machu Pichu](./deployment/gradio_app.png)
+### Recognizing Machu Picchu
+<p align="center">
+	<img src="./deployment/gradio_app.png"
+</p>
 
-7. **API integration with GitHub Pages**
+## 7. API integration with GitHub Pages
 The deployed model API is integrated [here](https://atquiya-labiba.github.io/Historical-Architectural-Landmark-Recognizer/) in GitHub Pages Website. Implementation and other details can be found in [docs](./docs) folder.
