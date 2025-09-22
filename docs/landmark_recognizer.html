@@ -3,7 +3,7 @@ title: Historical & Architectural Landmark Recognizer
 layout: page
 ---
 <style>
-    .page-heading h1 {                
+    .page-heading h1 {
         font-size: 24px !important;
     }
 
@@ -142,16 +142,12 @@ layout: page
         uploadBtn.addEventListener("click", () => {
             fileInput.click();
         });
-        clearBtn.addEventListener("click", () => {
-            fileInput.value = "";
-            preview.src = "";
-            preview.style.display = "none";
-            resultBox.innerText = "";
-            resultBox.className = "";
-        });
 
         // Show a preview when file is selected
         fileInput.addEventListener("change", () => {
+            if (preview.src.startsWith('blob:')) {
+                URL.revokeObjectURL(preview.src);
+            }
             if (fileInput.files.length > 0) {
                 preview.src = URL.createObjectURL(fileInput.files[0]);
                 preview.style.display = "block";
@@ -167,6 +163,10 @@ layout: page
             resultBox.innerText = "";
             resultBox.className = "";
             clearBtn.style.display = "none";
+
+            if (preview.src.startsWith('blob:')) {
+                URL.revokeObjectURL(preview.src);
+            }
         });
 
         // Predict button 
