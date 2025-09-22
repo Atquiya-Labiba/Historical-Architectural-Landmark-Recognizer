@@ -70,3 +70,10 @@ The model is deployed to HuggingFace Spaces Gradio App. The implementation can b
 
 ## 7. API integration with GitHub Pages
 The deployed model API is integrated [here](https://atquiya-labiba.github.io/Historical-Architectural-Landmark-Recognizer/) in GitHub Pages Website. Implementation and other details can be found in [docs](./docs) folder.
+
+### Recognizing Palace Of Versailles via API
+<p align="center">
+     <img src="./github_page.png"
+   </p>
+   <p align="center">  
+  </p>
