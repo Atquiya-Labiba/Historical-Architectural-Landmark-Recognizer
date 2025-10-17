@@ -11,7 +11,9 @@ def recognize_image(image):
     pred, idx, probs = model.predict(img)
     return dict(zip(landmark_labels, map(float, probs)))
 
-image = gr.Image(type="pil")
+image = gr.Image(type="pil",
+                height=400,    
+                width=400)
 label = gr.Label(num_top_classes=5)
 examples = [
     './test_images/unknown01.jpeg',

@@ -18,13 +18,12 @@ An image classification model that leverages data collection, augmentation, mode
 
 
 ## 1. Data Collection 
-   - Images of 13 famous historical and architectural landmarks are collected using DuckDuckGo Image Search 
+   - A total of 3,728 images were collected using DuckDuckGo Image Search, covering 13 famous historical and architectural landmarks
    - Each landmark is assigned to its own folder in the [data/](./data/) directory
 
 ## 2. Data Cleaning & Verification 
-   - The downloaded images are verified 
-   - Then any failed downloads are removed 
-
+   - All downloaded images were checked to ensure they were valid and not corrupted
+   - Any failed images detected during verification were automatically removed from the dataset
 ## 3. DataLoader  
    - DataBlock is created to organize the dataset by images and their corresponding labels
    - The dataset is split into 90% training and 10% validation
@@ -35,15 +34,15 @@ An image classification model that leverages data collection, augmentation, mode
 - Data augmentation is applied to increase variety in the training data
 - RandomResizedCrop(224, min_scale=0.5) is used which randomly crops and resizes the images to 224×224 pixels
 
- The final dataset has 3.5K+ images of 13 different classes. Details on data preparation can be found [here](./notebooks/data_prep.ipynb) 
+ The final dataset has 3424 images of 13 different classes. Details on data preparation can be found [here](./notebooks/data_prep.ipynb) 
  
 ## 5. Training and Data Cleaning
 - The model is trained using ResNet34 as base model and fine tuned for 3 epochs. After data cleaning the model is retrained for 3 epochs achieving accuracy of 98.2%
-- Three other models: EfficientNet B0, EfficientNet B1 and MobileNet V3 Small are used for comparison. We are testing a (ResNet) against modern, efficient alternatives to find the best fit for our project.
-- ResNet-34 performed best for our case because it has a larger capacity to learn complex patterns. 
+- Three other models: EfficientNet B0, EfficientNet B1 and MobileNet V3 Small are used for comparison. 
+- ResNet-34 performed best in our case because its capacity allows it to learn complex patterns effectively, even from a relatively small dataset, while remaining stable and less prone to underfitting compared to the other models.
 ### Confusion Matrix for ResNet-34 Model   
    <p align="center">
-     <img src="./confusion_matrix.png" alt="Confusion Matrix" width="500">
+     <img src="./deployment/assets/confusion_matrix.png" alt="Confusion Matrix" width="500">
    </p> 
    <p align="center">
   <em> Confusion Matrix for ResNet-34 Model</em>
@@ -52,7 +51,7 @@ An image classification model that leverages data collection, augmentation, mode
 ### Model Comparison
 Three additional models—EfficientNet-B0, EfficientNet-B1, and MobileNet V3 Small—were also trained and evaluated. However, ResNet-34 achieved the best overall performance.
    <p align="center">
-     <img src="./model_comparison.png"
+     <img src="./deployment/assets/model_comparison.png"
    </p>
    <p align="center">
   <em>Accuracy comparison across ResNet-34, EfficientNet-B0, EfficientNet-B1, and MobileNet V3 Small</em>
@@ -65,7 +64,7 @@ The model is deployed to HuggingFace Spaces Gradio App. The implementation can b
 
 ### Recognizing Machu Picchu
 <p align="center">
-	<img src="./deployment/gradio_app.png"
+	<img src="./deployment/assets/gradio_app.png"
 </p>
 
 ## 7. API integration with GitHub Pages
@@ -73,7 +72,7 @@ The deployed model API is integrated [here](https://atquiya-labiba.github.io/His
 
 ### Recognizing Palace Of Versailles via API
 <p align="center">
-     <img src="./github_page.png"
+     <img src="./deployment/assets/github_page.png"
    </p>
    <p align="center">  
   </p>
