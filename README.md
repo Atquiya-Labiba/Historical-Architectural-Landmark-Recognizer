@@ -18,7 +18,7 @@ An image classification model that leverages data collection, augmentation, mode
 
 
 ## 1. Data Collection 
-   - A total of 3,728 images were collected using DuckDuckGo Image Search, covering 13 famous historical and architectural landmarks
+   - A total of 3,941 images were collected using DuckDuckGo Image Search, covering 13 famous historical and architectural landmarks
    - Each landmark is assigned to its own folder in the [data/](./data/) directory
 
 ## 2. Data Cleaning & Verification 
@@ -34,10 +34,10 @@ An image classification model that leverages data collection, augmentation, mode
 - Data augmentation is applied to increase variety in the training data
 - RandomResizedCrop(224, min_scale=0.5) is used which randomly crops and resizes the images to 224×224 pixels
 
- The final dataset has 3424 images of 13 different classes. Details on data preparation can be found [here](./notebooks/data_prep.ipynb) 
+ The final dataset has 3,633 images of 13 different classes. Details on data preparation can be found [here](./notebooks/data_prep.ipynb) 
  
 ## 5. Training and Data Cleaning
-- The model is trained using ResNet34 as base model and fine tuned for 3 epochs. After data cleaning the model is retrained for 3 epochs achieving accuracy of 98.2%
+- The model is trained using ResNet34 as base model and fine tuned for 3 epochs. After data cleaning the model is retrained for 3 epochs achieving accuracy of 98%
 - Three other models: EfficientNet B0, EfficientNet B1 and MobileNet V3 Small are used for comparison. 
 - ResNet-34 performed best in our case because its capacity allows it to learn complex patterns effectively, even from a relatively small dataset, while remaining stable and less prone to underfitting compared to the other models.
 ### Confusion Matrix for ResNet-34 Model   
