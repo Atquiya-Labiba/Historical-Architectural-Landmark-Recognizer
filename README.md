@@ -17,26 +17,23 @@ An image classification model that leverages data collection, augmentation, mode
 - Chichen Itza (Mexico) 
 
 
-## 1. Data Collection 
+## Data Collection 
    - A total of 3,686 images were collected using DuckDuckGo Image Search, covering 13 famous historical and architectural landmarks
    - Each landmark is assigned to its own folder in the [data/](./data/) directory
-
-## 2. Data Cleaning & Verification 
    - All downloaded images were checked to ensure they were valid and not corrupted
-   - Any failed images detected during verification were automatically removed from the dataset
-## 3. DataLoader  
+   - Any failed images detected during verification were automatically removed from the dataset 
    - DataBlock is created to organize the dataset by images and their corresponding labels
    - The dataset is split into 90% training and 10% validation
    - Initial image resize: **128×128 pixels**.
    - Final augmentation resize: **224×224 pixels**.
    
-## 4. Data Augmentation
+## Data Augmentation
 - Data augmentation is applied to increase variety in the training data
 - RandomResizedCrop(224, min_scale=0.5) is used which randomly crops and resizes the images to 224×224 pixels
 
  After cleaning and removing failed images,the final dataset has 3,543 images of 13 different classes. Details on data preparation can be found [here](./notebooks/data_prep.ipynb) 
  
-## 5. Training and Data Cleaning
+## Training and Data Cleaning
 - The model is trained using ResNet34 as base model and fine tuned for 3 epochs. After data cleaning the model is retrained for 3 epochs achieving accuracy of 97%
 - Three other models: EfficientNet B0, EfficientNet B1 and MobileNet V3 Small are used for comparison. 
 - ResNet-34 performed best in our case because its capacity allows it to learn complex patterns effectively, even from a relatively small dataset, while remaining stable and less prone to underfitting compared to the other models.
@@ -59,7 +56,7 @@ Three additional models—EfficientNet-B0, EfficientNet-B1, and MobileNet V3 Sma
 	   
 Details can be found from [Training and Data Cleaning Notebook](./notebooks/training_and_data_cleaning.ipynb)
 
-## 6. Model Deployment
+## Model Deployment
 The model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in [deployment folder](./deployment) or [here](https://huggingface.co/spaces/atquiyaoni/landmark-recognizer)
 
 ### Recognizing Machu Picchu
@@ -67,7 +64,7 @@ The model is deployed to HuggingFace Spaces Gradio App. The implementation can b
 	<img src="./deployment/assets/gradio_app.png"
 </p>
 
-## 7. API integration with GitHub Pages
+## API integration with GitHub Pages
 The deployed model API is integrated [here](https://atquiya-labiba.github.io/Historical-Architectural-Landmark-Recognizer/) in GitHub Pages Website. Implementation and other details can be found in [docs](./docs) folder.
 
 ### Recognizing Palace Of Versailles via API
