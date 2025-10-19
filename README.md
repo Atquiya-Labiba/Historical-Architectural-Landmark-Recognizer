@@ -73,3 +73,39 @@ The deployed model API is integrated [here](https://atquiya-labiba.github.io/His
    </p>
    <p align="center">  
   </p>
+
+## Build from Source
+### Clone the repo
+```bash
+git clone https://github.com/Atquiya-Labiba/Historical-Architectural-Landmark-Recognizer.git
+cd Historical-Architectural-Landmark-Recognizer
+```
+### Initialize and activate virtual environment
+```bash
+python -m venv venv
+venv\Scripts\activate 
+```
+### Installing PyTorch 
+**GPU installation :**
+```bash
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+```
+Replace cu121 with the CUDA version that matches your system.
+
+ **CPU-only installation**
+```bash
+pip3 install torch torchvision torchaudio
+```
+### Verifying PyTorch device
+Run the following code to verify installation
+```bash
+import torch
+
+print(torch.cuda.is_available())
+```
+If the output is True, then PyTorch is successfully set up to use the GPU.
+
+### Install Other Dependencies
+```bash
+pip3 install fastai fastbook nbdev gradio
+```bash
