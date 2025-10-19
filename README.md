@@ -17,7 +17,7 @@ An image classification model that leverages data collection, augmentation, mode
 - Chichen Itza (Mexico) 
 
 
-## Data Collection 
+## Data Collection & Preprocessing
    - A total of 3,686 images were collected using DuckDuckGo Image Search, covering 13 famous historical and architectural landmarks
    - Each landmark is assigned to its own folder in the [data/](./data/) directory
    - All downloaded images were checked to ensure they were valid and not corrupted
