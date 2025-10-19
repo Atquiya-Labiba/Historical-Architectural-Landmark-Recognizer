@@ -108,4 +108,4 @@ If the output is True, then PyTorch is successfully set up to use the GPU.
 ### Install Other Dependencies
 ```bash
 pip3 install fastai fastbook nbdev gradio
-```bash
+```
